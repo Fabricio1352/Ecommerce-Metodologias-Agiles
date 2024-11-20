@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres
+    restart: always
+    container_name: postgres_container
+    ports:
+      - "5432:5432" 
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=pw_usuarios
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "admin"
+    ports:
+      - "80:80"
+    volumes:
+      - ./sql/init_postgres.sql:/docker-entrypoint-initdb.d/init_postgres.sql
+    depends_on:
+      - postgres
+
+  mySQL:
+   image: mysql:latest
+   restart: always
+   container_name: agil
+   environment:
+    - MYSQL_DATABASE=pw_servicios
+    - MYSQL_ROOT_PASSWORD=agiles123!!
+
+   ports:
+    - '3306:3306'
+   volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
