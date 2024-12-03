@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backendagiles:
+    #cada dos espacios
+    build: itson
+    mem_limit: 512m #limite de memoria
+    ports:
+      - '8080:8080' #puertos interno docker y expuesto pc
+    environment:
+      DB_URL: jdbc:mysql://localhost:3307/pw_servicios?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_USER_NAME: root
+      DB_PASSWORD: agiles123!!
+    restart: always
