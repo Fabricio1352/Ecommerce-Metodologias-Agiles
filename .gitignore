@@ -1,0 +1,12 @@
+# Ignorar archivos de sockets y temporales
+*.sock
+*.log
+*.tmp
+
+# Ignorar directorios específicos
+data_services/
+data_users/
+
+# Archivos generados por el sistema
+.DS_Store
+Thumbs.db
