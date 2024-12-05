@@ -14,3 +14,30 @@ services:
       - '3307:3306'
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      #- ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      #  - ./data_services:/var/lib/mysql
+      # healthcheck:
+      #  test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      # timeout: 10s
+      # retries: 10
+
+      #mysql_users:
+      #image: mysql:latest
+      #restart: always
+      #container_name: agil_users
+      #environment:
+      #- MYSQL_DATABASE=pw_usuarios
+      # - MYSQL_ROOT_PASSWORD=agiles123!!  
+      #ports:
+      # - '3308:3306'  
+      #volumes:
+      # - ./sql/pw_usuarios.sql:/docker-entrypoint-initdb.d/pw_usuarios.sql
+      # - ./data_users:/var/lib/mysql # Volumen persistente para datos
+  rabbitmq:
+   image: rabbitmq:management
+  ports:
+    - "5672:5672" # Puerto para la comunicación con la aplicación
+    - "15672:15672" # Puerto para la interfaz de administración
+  environment:
+    RABBITMQ_DEFAULT_USER: guest
+    RABBITMQ_DEFAULT_PASS: guest
